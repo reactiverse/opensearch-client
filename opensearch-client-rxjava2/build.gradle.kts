@@ -78,8 +78,8 @@ publications {
       artifact(tasks["javadocJar"])
       pom {
         name.set(project.name)
-        description.set("Reactiverse Elasticsearch client :: RxJava2 bindings")
-        url.set("https://github.com/reactiverse/elasticsearch-client")
+        description.set("Reactiverse OpenSearch client :: RxJava2 bindings")
+        url.set("https://github.com/reactiverse/opensearch-client")
         licenses {
           license {
             name.set("The Apache License, Version 2.0")
@@ -92,11 +92,16 @@ publications {
             name.set("Julien Ponge")
             email.set("julien.ponge@gmail.com")
           }
+          developer {
+            id.set("sboeckelmann")
+            name.set("Sven Böckelmann")
+            email.set("sven.boeckelmann@googlemail.com")
+          }
         }
         scm {
-          connection.set("scm:git:git@github.com:reactiverse/elasticsearch-client.git")
-          developerConnection.set("scm:git:git@github.com:reactiverse/elasticsearch-client.git")
-          url.set("https://github.com/reactiverse/elasticsearch-client")
+          connection.set("scm:git:git@github.com:reactiverse/opensearch-client.git")
+          developerConnection.set("scm:git:git@github.com:reactiverse/opensearch-client.git")
+          url.set("https://github.com/reactiverse/opensearch-client")
         }
       }
     }

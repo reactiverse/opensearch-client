@@ -45,7 +45,7 @@ tasks {
       opensearchShimsDir,
       "io.reactiverse.opensearch.client"
     )
-    description = "Generate the shims from the ElasticSearch source code"
+    description = "Generate the shims from the OpenSearch source code"
     group = "build"
     dependsOn("opensearch-unpack")
     inputs.dir(opensearchSourcesDir)
