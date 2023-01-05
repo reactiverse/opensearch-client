@@ -23,6 +23,7 @@ val mutinyBindingsVersion = extra["mutinyBindingsVersion"]
 val assertjVersion = extra["assertjVersion"]
 val tcVersion = extra["tcVersion"]
 val junitVersion = extra["junitVersion"]
+val opensearchTCVersion = extra["opensearchTCVersion"]
 
 dependencies {
   testImplementation(project(":opensearch-client-rxjava2"))
@@ -33,7 +34,7 @@ dependencies {
   testImplementation("io.smallrye.reactive:smallrye-mutiny-vertx-junit5:${mutinyBindingsVersion}")
 
   testImplementation("org.assertj:assertj-core:${assertjVersion}")
-  testImplementation("org.testcontainers:elasticsearch:${tcVersion}")
+  testImplementation("org.opensearch:opensearch-testcontainers:${opensearchTCVersion}")
   testImplementation("org.testcontainers:junit-jupiter:${tcVersion}")
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")

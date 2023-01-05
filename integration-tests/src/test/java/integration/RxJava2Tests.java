@@ -16,24 +16,25 @@
 
 package integration;
 
-import io.reactiverse.elasticsearch.client.reactivex.RestHighLevelClient;
+import io.reactiverse.opensearch.client.reactivex.RestHighLevelClient;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
 import io.vertx.reactivex.core.Vertx;
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testcontainers.elasticsearch.ElasticsearchContainer;
+import org.opensearch.action.get.GetRequest;
+import org.opensearch.action.index.IndexRequest;
+import org.opensearch.client.RequestOptions;
+import org.opensearch.client.RestClient;
+import org.opensearch.client.RestClientBuilder;
+import org.opensearch.common.xcontent.XContentType;
+import org.opensearch.testcontainers.OpensearchContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,7 +43,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RxJava2Tests {
 
   @Container
-  private ElasticsearchContainer container = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.1");
+  private OpensearchContainer container = new OpensearchContainer(
+    DockerImageName.parse("opensearchproject/opensearch:2.4.1").asCompatibleSubstituteFor("opensearchproject/opensearch")
+  );
+
 
   private RestHighLevelClient client;
 
@@ -61,14 +65,13 @@ public class RxJava2Tests {
   @Test
   void indexThenGet(Vertx vertx, VertxTestContext testContext) {
     String yo = "{\"foo\": \"bar\"}";
-    IndexRequest req = new IndexRequest("posts", "_doc", "1").source(yo, XContentType.JSON);
+    IndexRequest req = new IndexRequest("posts").id("1").source(yo, XContentType.JSON);
     client
       .rxIndexAsync(req, RequestOptions.DEFAULT)
-      .flatMap(resp -> client.rxGetAsync(new GetRequest("posts", "_all", "1"), RequestOptions.DEFAULT))
+      .flatMap(resp -> client.rxGetAsync(new GetRequest("posts").id("1"), RequestOptions.DEFAULT))
       .subscribe(resp -> testContext.verify(() -> {
         assertThat(Thread.currentThread().getName()).startsWith("vert.x-eventloop-thread-");
         assertThat(vertx.getOrCreateContext().isEventLoopContext()).isTrue();
-        assertThat(resp.getType()).isEqualTo("_doc");
         assertThat(resp.getSourceAsMap()).hasEntrySatisfying("foo", "bar"::equals);
         testContext.completeNow();
       }), testContext::failNow);

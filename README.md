@@ -26,13 +26,13 @@ The Maven `groupId` is `io.reactiverse`.
 Here is a sample usage of the RxJava 2 API where an index request is followed by a get request:
 
 ```java
-String yo = "{\"foo\": \"bar\"}";
-IndexRequest req = new IndexRequest("posts", "_doc", "1").source(yo, XContentType.JSON);
-client
+  String yo = "{\"foo\": \"bar\"}";
+  IndexRequest req = new IndexRequest("posts").id("1").source(yo, XContentType.JSON);
+  client
   .rxIndexAsync(req, RequestOptions.DEFAULT)
-  .flatMap(resp -> client.rxGetAsync(new GetRequest("posts", "_all", "1"), RequestOptions.DEFAULT))
+  .flatMap(resp -> client.rxGetAsync(new GetRequest("posts").id("1"), RequestOptions.DEFAULT))
   .subscribe(resp -> {
-    // Handle the response here
+  // Handle the response here
   });
 ```
 

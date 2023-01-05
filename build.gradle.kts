@@ -30,13 +30,14 @@ allprojects {
   version = "0.9.0-SNAPSHOT"
   group = "io.reactiverse"
 
-  extra["vertxVersion"] = "4.1.0"
+  extra["vertxVersion"] = "4.3.6"
   extra["opensearchClientVersion"] = "2.4.1"
-  extra["mutinyBindingsVersion"] = "2.7.0"
+  extra["mutinyBindingsVersion"] = "2.29.0"
 
-  extra["assertjVersion"] = "3.19.0"
-  extra["tcVersion"] = "1.15.3"
-  extra["junitVersion"] = "5.7.2"
+  extra["assertjVersion"] = "3.23.1"
+  extra["tcVersion"] = "1.17.6"
+  extra["opensearchTCVersion"] = "2.0.0"
+  extra["junitVersion"] = "5.9.0"
   extra["logbackVersion"] = "1.2.3"
   extra["javaParserVersion"] = "3.9.1"
 
