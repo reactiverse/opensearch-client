@@ -35,6 +35,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Run integration tests
+        run: ./gradlew cleanTest test
+
 #      - name: Deploy from the master branch
 #        if: github.ref == 'refs/heads/master'
 #        run: ./gradlew publish -PossrhUsername=${{ secrets.SONATYPE_NEXUS_USERNAME }} -PossrhPassword=${{ secrets.SONATYPE_NEXUS_PASSWORD }}
