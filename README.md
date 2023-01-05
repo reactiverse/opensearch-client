@@ -14,10 +14,10 @@ The generated shims ensure that asynchronous event processing respect the Vert.x
 
 The following modules can be used:
 
-* `opensearch-client`: a classic Vert.x API based on callbacks and Vert.x 4.1.0
-* `opensearch-client-mutiny`: a [Mutiny](https://smallrye.io/smallrye-mutiny/) API of the client
-* `opensearch-client-rxjava2`: a RxJava 2 API of the client
-* `opensearch-client-rxjava3`: a RxJava 3 API of the client
+* `opensearch-rest-high-level-client`: a classic Vert.x API based on callbacks and Vert.x 4.1.0
+* `opensearch-rest-high-level-client-mutiny`: a [Mutiny](https://smallrye.io/smallrye-mutiny/) API of the client
+* `opensearch-rest-high-level-client-rxjava2`: a RxJava 2 API of the client
+* `opensearch-rest-high-level-client-rxjava3`: a RxJava 3 API of the client
 
 The Maven `groupId` is `io.reactiverse`.
 

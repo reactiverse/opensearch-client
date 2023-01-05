@@ -26,11 +26,13 @@ val junitVersion = extra["junitVersion"]
 val opensearchTCVersion = extra["opensearchTCVersion"]
 
 dependencies {
-  testImplementation(project(":opensearch-client-rxjava2"))
-  testImplementation(project(":opensearch-client-mutiny"))
+  testImplementation(project(":opensearch-rest-high-level-client-rxjava3"))
+  testImplementation(project(":opensearch-rest-high-level-client-rxjava2"))
+  testImplementation(project(":opensearch-rest-high-level-client-mutiny"))
 
   testImplementation("io.vertx:vertx-junit5:${vertxVersion}")
   testImplementation("io.vertx:vertx-junit5-rx-java2:${vertxVersion}")
+  testImplementation("io.vertx:vertx-junit5-rx-java3:${vertxVersion}")
   testImplementation("io.smallrye.reactive:smallrye-mutiny-vertx-junit5:${mutinyBindingsVersion}")
 
   testImplementation("org.assertj:assertj-core:${assertjVersion}")
