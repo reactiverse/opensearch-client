@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-rootProject.name = "opensearch-client"
+rootProject.name = "opensearch-rest-high-level-client"
 
 include(
   "shim-generator",
   "integration-tests",
-  "opensearch-client-rxjava2",
-  "opensearch-client-rxjava3",
-  "opensearch-client-mutiny"
+  "opensearch-rest-high-level-client-rxjava2",
+  "opensearch-rest-high-level-client-rxjava3",
+  "opensearch-rest-high-level-client-mutiny"
 )
