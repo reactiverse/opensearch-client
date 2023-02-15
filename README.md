@@ -1,6 +1,5 @@
 # An OpenSearch client for Eclipse Vert.x
-
-[![Build Status](https://travis-ci.org/reactiverse/opensearch-client.svg?branch=master)](https://travis-ci.org/reactiverse/opensearch-client)
+[![Build Status](https://github.com/reactiverse/opensearch-client/actions/workflows/ci-cd.yml/badge.svg?branch=main)](https://github.com/reactiverse/opensearch-client/actions/workflows/ci-cd.yml)
 
 This client exposes the [OpenSearch Java High Level REST Client](https://opensearch.org/docs/latest/clients/java-rest-high-level/) for [Eclipse Vert.x](https://vertx.io/) applications.
 
