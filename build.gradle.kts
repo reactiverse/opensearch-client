@@ -109,4 +109,76 @@ tasks {
       (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
   }
+
+  withType<Sign> {
+    onlyIf { project.extra["isReleaseVersion"] as Boolean }
+  }
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("mavenJava") {
+      from(components["java"])
+      artifact(tasks["sourcesJar"])
+      artifact(tasks["javadocJar"])
+      pom {
+        name.set(project.name)
+        description.set("Reactiverse OpenSearch client")
+        url.set("https://github.com/reactiverse/opensearch-client")
+        licenses {
+          license {
+            name.set("The Apache License, Version 2.0")
+            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+          }
+        }
+        developers {
+          developer {
+            id.set("jponge")
+            name.set("Julien Ponge")
+            email.set("julien.ponge@gmail.com")
+          }
+          developer {
+            id.set("sboeckelmann")
+            name.set("Sven Böckelmann")
+            email.set("sven.boeckelmann@googlemail.com")
+          }
+        }
+        scm {
+          connection.set("scm:git:git@github.com:reactiverse/opensearch-client.git")
+          developerConnection.set("scm:git:git@github.com:reactiverse/opensearch-client.git")
+          url.set("https://github.com/reactiverse/opensearch-client")
+        }
+      }
+    }
+  }
+  repositories {
+    // To locally check out the poms
+    maven {
+      val releasesRepoUrl = uri("$buildDir/repos/releases")
+      val snapshotsRepoUrl = uri("$buildDir/repos/snapshots")
+      name = "BuildDir"
+      url = if (project.extra["isReleaseVersion"] as Boolean) releasesRepoUrl else snapshotsRepoUrl
+    }
+    maven {
+      val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+      val snapshotsRepoUrl = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+      name = "SonatypeOSS"
+      url = if (project.extra["isReleaseVersion"] as Boolean) releasesRepoUrl else snapshotsRepoUrl
+      credentials {
+        val ossrhUsername: String by project
+        val ossrhPassword: String by project
+        username = ossrhUsername
+        password = ossrhPassword
+      }
+    }
+  }
+}
+
+signing {
+  sign(publishing.publications["mavenJava"])
+}
+
+tasks.wrapper {
+  gradleVersion = "7.1"
+  distributionType = Wrapper.DistributionType.ALL
 }
