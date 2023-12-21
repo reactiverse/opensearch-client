@@ -67,6 +67,10 @@ tasks {
       (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
   }
+
+  withType<Sign> {
+    onlyIf { project.extra["isReleaseVersion"] as Boolean }
+  }
 }
 
 publishing {

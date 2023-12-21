@@ -68,6 +68,9 @@ tasks {
     }
   }
 
+  withType<Sign> {
+    onlyIf { project.extra["isReleaseVersion"] as Boolean }
+  }
 }
 publishing {
 
