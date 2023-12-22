@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy from the main branch
         if: github.ref == 'refs/heads/main'
-        run: ./gradlew publish -PsigningKey=${{ secrets.GPG_PRIVATE_KEY }} -PsigningPassword=${{secrets.GPG_PRIVATE_KEY_PASSPHRASE}} -PossrhUsername=${{ secrets.SONATYPE_NEXUS_USERNAME }} -PossrhPassword=${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+        run: ./gradlew publish -PossrhUsername=${{ secrets.SONATYPE_NEXUS_USERNAME }} -PossrhPassword=${{ secrets.SONATYPE_NEXUS_PASSWORD }}
 
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
