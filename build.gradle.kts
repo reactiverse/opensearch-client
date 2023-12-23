@@ -175,7 +175,9 @@ publishing {
 }
 
 signing {
-  useInMemoryPgpKeys(findProperty("signingKey"), findProperty("signingPassword"))
+  val signingKey = findProperty("signingKey")
+  val signingPassword = findProperty("signingPassword")
+  useInMemoryPgpKeys(signingKey, signingPassword)
   sign(publishing.publications["mavenJava"])
 }
 
