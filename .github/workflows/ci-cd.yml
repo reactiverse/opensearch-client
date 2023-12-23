@@ -35,6 +35,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Sign from the main branch
+        if: github.ref == 'refs/heads/main'
+        run: ./gradlew sign -PsigningKey='${{ secrets.GPG_PRIVATE_KEY }}' -PsigningPassword='${{secrets.GPG_PRIVATE_KEY_PASSPHRASE}}' -PossrhUsername='${{ secrets.SONATYPE_NEXUS_USERNAME }}' -PossrhPassword='${{ secrets.SONATYPE_NEXUS_PASSWORD }}'
+        env:
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}' 
+          ORG_GRADLE_PROJECT_signingPassword: ${{secrets.GPG_PRIVATE_KEY_PASSPHRASE}}
+
       - name: Deploy from the main branch
         if: github.ref == 'refs/heads/main'
         run: ./gradlew publish -PsigningKey='${{ secrets.GPG_PRIVATE_KEY }}' -PsigningPassword='${{secrets.GPG_PRIVATE_KEY_PASSPHRASE}}' -PossrhUsername='${{ secrets.SONATYPE_NEXUS_USERNAME }}' -PossrhPassword='${{ secrets.SONATYPE_NEXUS_PASSWORD }}'
