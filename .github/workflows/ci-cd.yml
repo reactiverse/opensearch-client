@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy from the main branch
         if: github.ref == 'refs/heads/main'
-        run: ./gradlew publish -PossrhUsername='${{ secrets.SONATYPE_NEXUS_USERNAME }}' -PossrhPassword='${{ secrets.SONATYPE_NEXUS_PASSWORD }}'
+        run: ./gradlew publish -d -PossrhUsername='${{ secrets.SONATYPE_NEXUS_USERNAME }}' -PossrhPassword='${{ secrets.SONATYPE_NEXUS_PASSWORD }}'
         env:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}' 
           ORG_GRADLE_PROJECT_signingPassword: ${{secrets.GPG_PRIVATE_KEY_PASSPHRASE}}
